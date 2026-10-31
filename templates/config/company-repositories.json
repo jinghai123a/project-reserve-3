@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "repositories": {
+    "toolkit": "example-org/cloud-company-kit"
+  },
+  "customer_repository_policy": "one_independent_repository_per_customer_project",
+  "control_repository_policy": "same_as_customer_repository",
+  "control_branch": "automation/state",
+  "distribution_repository": null
+}

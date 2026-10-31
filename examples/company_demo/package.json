@@ -1,0 +1,12 @@
+{
+  "name": "cloudkit-company-demo-acceptance",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Real Chromium acceptance for the local company demo",
+  "scripts": {
+    "test:browser": "node browser-test.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

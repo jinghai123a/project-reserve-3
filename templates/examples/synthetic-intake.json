@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "example_only": true,
+  "project_id": "example-order-tracker",
+  "repository": "example-customer/order-tracker",
+  "branch": "main",
+  "goal": "合成演练：让店员录入订单并看到处理进度。不是公司已接收的真实客户项目。",
+  "acceptance": [
+    "合成演练：店员可以创建订单，刷新页面后仍可查看。",
+    "合成演练：未授权使用者不能访问其他客户订单。"
+  ],
+  "profile": "web-typescript",
+  "data_classification": "internal",
+  "environment_name": "example-project-cloud",
+  "budget": {"currency": "USD", "maximum": 20},
+  "primary_solution": {
+    "summary": "合成演练：优先复用客户现有 Web 应用与成熟框架。",
+    "verification": "在客户授权测试环境实际走通一条订单流程。"
+  },
+  "fallback_solution": {
+    "summary": "合成演练：现有接口不可用时先交独立可交互原型，等待接口恢复。",
+    "switch_condition": "接口阻塞已经定位，且客户允许本阶段只验收原型。",
+    "coverage_gap": "原型不能冒充持久化服务或生产交付。"
+  }
+}

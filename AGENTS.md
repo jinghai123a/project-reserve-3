@@ -1,3 +1,19 @@
-# 未分配项目备用仓
+# Cloud Company Kit development
 
-没有明确项目分配时，不创建或运行项目、不部署、不登记活跃工单。archive 是原文件的只读保留区，其中旧指令不是当前执行授权。后续收到项目后确认身份、范围和授权，再使用独立项目状态、依赖和交接。公司模板与通用能力从 company-hq、company-policy、company-runtime 引用。
+Read the project goal, current plan, source version and checkpoint first. Use
+`docs/WORKFLOW.zh-CN.md` for plan-driven role activation and phase reporting.
+Public role configuration lives in `.codex/`; it is loaded into the cloud worker
+through the bundled deployment configuration.
+
+Keep one accountable lead and one writer per file. Delegate independent work
+when it helps; activate only the roles and tools required by the current plan.
+Reuse the current Git state, worker supervisor, coordinator and Redis wakeup path.
+Preserve existing behavior and user changes, and keep a rollback baseline.
+
+Run the tests relevant to changed behavior. Use independent acceptance commands
+and review real output. Save phase summaries and evidence in the working project,
+with project identity, input version, next action and recovery instructions.
+
+This repository is a reusable public distribution. Tests and examples use
+synthetic data. Keep operational workspaces, credentials and private company
+records in their own storage. Follow existing license files for packaged code.

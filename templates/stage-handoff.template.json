@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "kind": "stage_handoff_summary",
+  "resume_context": {
+    "work_scope": "project",
+    "project_id": null,
+    "repository": null,
+    "source_revision": null,
+    "stage_id": null,
+    "input_sha256": null,
+    "project_status": null
+  },
+  "department_id": null,
+  "group_id": null,
+  "participants": [],
+  "producer": {"actor": null, "role": null},
+  "recorded_at": null,
+  "summary": null,
+  "results": [],
+  "artifacts": [],
+  "unverified": [],
+  "blockers": [],
+  "next_action": {
+    "description": null,
+    "kind": "none",
+    "status": "none",
+    "owner": {"department_id": null, "actor": null, "role": null}
+  }
+}

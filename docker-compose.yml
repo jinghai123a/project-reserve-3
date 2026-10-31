@@ -1,0 +1,100 @@
+name: ${COMPOSE_PROJECT_NAME:-cloudkit}
+x-worker: &worker
+  image: codexcloudkit:${CLOUDKIT_IMAGE_TAG:-cloud-upgrade}
+  build:
+    context: .
+    args:
+      CODEX_VERSION: ${CODEX_VERSION:-0.162.1}
+  user: "1000:1000"
+  init: false
+  environment:
+    CLOUDKIT_CONTROL_REPOSITORY: ${CLOUDKIT_CONTROL_REPOSITORY:?Set the explicit control owner/repository}
+    CLOUDKIT_PROJECT_REPOSITORY: ${CLOUDKIT_PROJECT_REPOSITORY:?Set the explicit business owner/repository}
+    CLOUDKIT_PROJECT_BRANCH: ${CLOUDKIT_PROJECT_BRANCH:-main}
+    CLOUDKIT_SOURCE_SHA: ${CLOUDKIT_SOURCE_SHA:-}
+    CLOUDKIT_MODEL: ${CLOUDKIT_MODEL:-}
+    CLOUDKIT_REDIS_URL: redis://redis:6379/0
+    CLOUDKIT_QUEUE: cloudkit
+    CLOUDKIT_ACTIVATE_CONTROL_CONFIG: ${CLOUDKIT_ACTIVATE_CONTROL_CONFIG:-1}
+    CLOUDKIT_AGENT_CONFIG_SOURCE: ${CLOUDKIT_AGENT_CONFIG_SOURCE:-/data/control/.codex}
+    CLOUDKIT_PROBE_TIMEOUT: ${CLOUDKIT_PROBE_TIMEOUT:-90}
+    CLOUDKIT_GITHUB_TOKEN_FILE: /run/secrets/github_token
+  volumes:
+    - cloudkit_data:/data
+  secrets:
+    - github_token
+  networks: [cloudkit]
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+  tmpfs:
+    - /tmp:rw,nosuid,nodev,mode=1777
+  read_only: true
+  pids_limit: 512
+  mem_limit: ${CLOUDKIT_MEMORY_LIMIT:-4g}
+  cpus: ${CLOUDKIT_CPU_LIMIT:-2}
+  stop_grace_period: 120s
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+services:
+  init:
+    <<: *worker
+    profiles: [tools]
+    user: "0:0"
+    cap_add: [CHOWN, FOWNER, DAC_OVERRIDE]
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - "mkdir -p /data/home/.codex /data/runs /data/probe; chown 1000:1000 /data /data/home /data/home/.codex /data/runs /data/probe; chmod 700 /data/home/.codex"
+  redis:
+    image: redis:7.2.16-alpine
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - redis_data:/data
+      - ./deploy/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks: [cloudkit]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+    mem_limit: 768m
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
+  worker:
+    <<: *worker
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: "on-failure:3"
+    healthcheck:
+      test: ["CMD", "python", "/opt/cloudkit/deploy/runtime.py", "health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+  dispatcher:
+    <<: *worker
+    command: ["python", "/opt/cloudkit/deploy/dispatch.py"]
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: "on-failure:3"
+    healthcheck:
+      test: ["CMD", "python", "/opt/cloudkit/deploy/runtime.py", "dispatcher_health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+volumes:
+  cloudkit_data:
+  redis_data:
+networks:
+  cloudkit:
+secrets:
+  github_token:
+    file: ${CLOUDKIT_GITHUB_TOKEN_FILE:-./deploy/secrets/github_token}

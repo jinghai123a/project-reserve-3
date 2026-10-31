@@ -1,0 +1,43 @@
+name: Cloud deployment smoke
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Dockerfile'
+      - 'pyproject.toml'
+      - '.dockerignore'
+      - 'docker-compose.yml'
+      - 'deploy/**'
+      - 'src/**'
+      - '.codex/**'
+      - 'company/**'
+      - 'docs/WORKFLOW.zh-CN.md'
+      - '.github/workflows/deploy-smoke.yml'
+  pull_request:
+    paths:
+      - 'Dockerfile'
+      - 'pyproject.toml'
+      - '.dockerignore'
+      - 'docker-compose.yml'
+      - 'deploy/**'
+      - 'src/**'
+      - '.codex/**'
+      - 'company/**'
+      - 'docs/WORKFLOW.zh-CN.md'
+      - '.github/workflows/deploy-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deploy-smoke-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Exercise cloud container without model credentials
+        run: bash deploy/smoke.sh
+      - name: Validate optional private administration network
+        run: bash deploy/network/validate.sh

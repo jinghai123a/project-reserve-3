@@ -1,0 +1,22 @@
+.git
+**/__pycache__
+**/.venv
+**/node_modules
+**/.codex
+!deploy/company-rules/.codex/
+!deploy/company-rules/.codex/**
+**/.env
+**/.env.*
+**/secrets
+**/backups
+**/auth.json
+**/*.log
+verification
+state
+.cloudkit*
+
+# Public role configuration only; authentication files remain excluded.
+!.codex/
+!.codex/config.toml
+!.codex/agents/
+!.codex/agents/*.toml

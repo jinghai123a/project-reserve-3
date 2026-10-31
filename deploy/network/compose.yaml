@@ -1,0 +1,50 @@
+name: ${CLOUDKIT_NETWORK_PROJECT:-cloudkit-admin-network}
+services:
+  tailscale:
+    image: ghcr.io/tailscale/tailscale:v1.104.2
+    hostname: cloudkit-admin
+    entrypoint: ["/bin/sh", "/config/entrypoint.sh"]
+    environment:
+      TS_HOSTNAME: ${CLOUDKIT_TAILSCALE_HOSTNAME:-cloudkit-admin}
+      TS_USERSPACE: "true"
+      TS_AUTH_ONCE: "true"
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_KUBE_SECRET: ""
+      TS_ACCEPT_DNS: "false"
+      TS_EXTRA_ARGS: --accept-routes=false --ssh=false --advertise-tags=tag:cloudkit-admin
+      TS_SERVE_CONFIG: /config/serve.json
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_LOCAL_ADDR_PORT: 127.0.0.1:9002
+    secrets:
+      - tailscale_authkey
+    volumes:
+      - tailscale_state:/var/lib/tailscale
+      - ./config:/config:ro
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks: [administration]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,mode=1777
+      - /var/run/tailscale:rw,nosuid,nodev,mode=0700
+    restart: "on-failure:3"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9002/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 20s
+    mem_limit: 256m
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options: {max-size: "5m", max-file: "2"}
+volumes:
+  tailscale_state:
+networks:
+  administration:
+secrets:
+  tailscale_authkey:
+    file: ${CLOUDKIT_TAILSCALE_AUTHKEY_FILE:-./secrets/tailscale_authkey}

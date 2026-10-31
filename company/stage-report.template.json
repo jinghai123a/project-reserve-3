@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "example_only": true,
+  "project_id": null,
+  "repository": null,
+  "source_revision": null,
+  "stage_id": null,
+  "input_sha256": null,
+  "participants": [],
+  "results": [],
+  "evidence_refs": [],
+  "scores": {
+    "goal": {
+      "weight": 35,
+      "value": null,
+      "evidence": []
+    },
+    "correctness": {
+      "weight": 25,
+      "value": null,
+      "evidence": []
+    },
+    "verification": {
+      "weight": 20,
+      "value": null,
+      "evidence": []
+    },
+    "efficiency": {
+      "weight": 10,
+      "value": null,
+      "evidence": []
+    },
+    "handoff": {
+      "weight": 10,
+      "value": null,
+      "evidence": []
+    }
+  },
+  "overall_score": null,
+  "unverified": [],
+  "blockers": [],
+  "improvement_candidates": [],
+  "next_action": null,
+  "recovery_entry": null,
+  "reviewer": null
+}

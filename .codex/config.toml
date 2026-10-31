@@ -1,0 +1,118 @@
+# Codex rust-v0.162.1 config.schema.json; no model or permission overrides.
+# 6 is a concurrency cap, not a pre-started team. max_depth is V1-specific.
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 6
+max_depth = 2
+
+[agents.product_manager]
+description = "产品研究主管，兼任体验负责人，定义结果与验收。"
+config_file = "agents/product_manager.toml"
+
+[agents.product_analyst]
+description = "研究与需求分析，核验来源并形成可测试用户场景。"
+config_file = "agents/product_analyst.toml"
+
+[agents.ui_designer]
+description = "交互、组件和可访问性约束，按界面需求启用。"
+config_file = "agents/ui_designer.toml"
+
+[agents.architecture_manager]
+description = "架构主管，解决跨模块契约与开源组件选择。"
+config_file = "agents/architecture_manager.toml"
+
+[agents.architecture_researcher]
+description = "开源选型、API/数据契约与可靠性研究。"
+config_file = "agents/architecture_researcher.toml"
+
+[agents.engineering_manager]
+description = "工程主管，分配实现范围并完成组合行为验证。"
+config_file = "agents/engineering_manager.toml"
+
+[agents.frontend_engineer]
+description = "前端实现、组件复用与用户行为验证。"
+config_file = "agents/frontend_engineer.toml"
+
+[agents.backend_engineer]
+description = "业务接口、数据处理与必要领域逻辑实现。"
+config_file = "agents/backend_engineer.toml"
+
+[agents.integration_engineer]
+description = "接口整合、迁移、配置与发布交接。"
+config_file = "agents/integration_engineer.toml"
+
+[agents.qa_manager]
+description = "独立质量与安全验收主管，按证据定向退回。"
+config_file = "agents/qa_manager.toml"
+
+[agents.qa_reviewer]
+description = "代码、数据安全与故障路径独立审查。"
+config_file = "agents/qa_reviewer.toml"
+
+[agents.qa_verifier]
+description = "独立执行测试、验收、恢复和必要性能检查。"
+config_file = "agents/qa_verifier.toml"
+
+[agents.logistics_manager]
+description = "平台后勤主管，兼任发布运维，修复真实环境缺口。"
+config_file = "agents/logistics_manager.toml"
+
+[agents.logistics_dependencies]
+description = "隔离安装、锁文件、工具更新与恢复回执。"
+config_file = "agents/logistics_dependencies.toml"
+
+[agents.logistics_browser]
+description = "在真实可用浏览器中执行授权页面操作。"
+config_file = "agents/logistics_browser.toml"
+
+[agents.logistics_mail]
+description = "读取当前授权任务相关邮件并确认验证状态。"
+config_file = "agents/logistics_mail.toml"
+
+[agents.logistics_profile]
+description = "真实账户资料、凭据引用与安全支付渠道管理。"
+config_file = "agents/logistics_profile.toml"
+
+[agents.logistics_budget]
+description = "官方免费计划、许可证、额度与采购预算核验。"
+config_file = "agents/logistics_budget.toml"
+
+[agents.delivery_commander]
+description = "交付指挥，通常由主会话承担，负责目标和最终闭环。"
+config_file = "agents/delivery_commander.toml"
+
+[agents.department_coordinator]
+description = "跨部门协调，通常由主会话承担，解决依赖与集成交接。"
+config_file = "agents/department_coordinator.toml"
+
+[agents.market_researcher]
+description = "市场与用户研究，按来源验证需求、竞品和可行机会。"
+config_file = "agents/market_researcher.toml"
+
+[agents.source_librarian]
+description = "资料采集与来源管理，去重并保存任务所需证据索引。"
+config_file = "agents/source_librarian.toml"
+
+[agents.solution_planner]
+description = "形成可执行方案、工作包与验收，提交独立方案审查。"
+config_file = "agents/solution_planner.toml"
+
+[agents.plan_reviewer]
+description = "独立审查方案可行性、验收和依赖，禁止自审自批。"
+config_file = "agents/plan_reviewer.toml"
+
+[agents.operations_engineer]
+description = "真实发布、运行监测和备份恢复，输出版本与健康证据。"
+config_file = "agents/operations_engineer.toml"
+
+[agents.art_director]
+description = "按需视觉美术主管，分派视觉研究和资产制作并协调UI、前端和独立QA。"
+config_file = "agents/art_director.toml"
+
+[agents.visual_researcher]
+description = "按项目、品牌、用户和设备开展视觉研究，保留来源、权利与适配依据。"
+config_file = "agents/visual_researcher.toml"
+
+[agents.visual_asset_artist]
+description = "用实际可用成熟工具制作与修改视觉资产，交付可编辑源文件、导出及来源清单。"
+config_file = "agents/visual_asset_artist.toml"

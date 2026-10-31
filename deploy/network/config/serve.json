@@ -1,0 +1,7 @@
+{
+  "TCP": {
+    "2222": {
+      "TCPForward": "host.docker.internal:22"
+    }
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "purpose": "按任务启用的职责与角色目录，不代表这些代理已经运行。",
+  "execution": {
+    "concurrency_cap": 6,
+    "prestart_all_roles": false,
+    "max_depth_v1": 2,
+    "v2_depth_enforced": false,
+    "small_project_lead_may_execute_specialist_work": true,
+    "command_and_coordination_default": "main_session",
+    "managers_delegate": "task_scoped_leaf_work"
+  },
+  "roles": {
+    "architecture_manager": {
+      "kind": "manager",
+      "activation": "on_demand"
+    },
+    "architecture_researcher": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "art_director": {
+      "kind": "manager",
+      "activation": "on_demand"
+    },
+    "backend_engineer": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "delivery_commander": {
+      "kind": "session_responsibility",
+      "activation": "main_session_by_default"
+    },
+    "department_coordinator": {
+      "kind": "session_responsibility",
+      "activation": "main_session_by_default"
+    },
+    "engineering_manager": {
+      "kind": "manager",
+      "activation": "on_demand"
+    },
+    "frontend_engineer": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "integration_engineer": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "logistics_browser": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "logistics_budget": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "logistics_dependencies": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "logistics_mail": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "logistics_manager": {
+      "kind": "manager",
+      "activation": "on_demand"
+    },
+    "logistics_profile": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "market_researcher": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "operations_engineer": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "plan_reviewer": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "product_analyst": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "product_manager": {
+      "kind": "manager",
+      "activation": "on_demand"
+    },
+    "qa_manager": {
+      "kind": "manager",
+      "activation": "on_demand"
+    },
+    "qa_reviewer": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "qa_verifier": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "solution_planner": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "source_librarian": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "ui_designer": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "visual_asset_artist": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    },
+    "visual_researcher": {
+      "kind": "specialist",
+      "activation": "on_demand"
+    }
+  },
+  "departments": [
+    {
+      "id": "command",
+      "name": "项目指挥",
+      "owner": "delivery_commander",
+      "specialists": [],
+      "trigger": "新目标、范围变化或最终交付",
+      "deliverable": "目标版本、任务图、完成定义与最终交付回执",
+      "acceptance": "目标逐项对应实际产物、独立验收与具体阻塞"
+    },
+    {
+      "id": "cross_department_coordination",
+      "name": "跨部门协调",
+      "owner": "department_coordinator",
+      "specialists": [
+        "integration_engineer"
+      ],
+      "trigger": "跨部门依赖、接口冲突或集成候选",
+      "deliverable": "依赖状态、独占写入范围和集成交接",
+      "acceptance": "依赖引用与版本一致，组合行为实际验证"
+    },
+    {
+      "id": "market_research",
+      "name": "市场研究",
+      "owner": "product_manager",
+      "specialists": [
+        "market_researcher"
+      ],
+      "trigger": "市场、用户或竞品假设影响决策",
+      "deliverable": "有来源的对照研究与可验证需求假设",
+      "acceptance": "证据可追溯，推断与事实分开，覆盖当前决策问题"
+    },
+    {
+      "id": "source_collection",
+      "name": "资料采集",
+      "owner": "product_manager",
+      "specialists": [
+        "source_librarian"
+      ],
+      "trigger": "缺少一手证据或来源版本变化",
+      "deliverable": "去重来源索引、事实摘要、时间与版本",
+      "acceptance": "引用可定位，结论有支持资料，未读资料不冒充已核验"
+    },
+    {
+      "id": "planning",
+      "name": "方案规划",
+      "owner": "architecture_manager",
+      "specialists": [
+        "solution_planner"
+      ],
+      "trigger": "目标需拆分或方案存在跨模块变更",
+      "deliverable": "方案、依赖任务、验收命令和恢复路径",
+      "acceptance": "输入和产物明确，提交独立方案审查后才视为批准"
+    },
+    {
+      "id": "independent_plan_review",
+      "name": "独立方案审查",
+      "owner": "qa_manager",
+      "specialists": [
+        "plan_reviewer"
+      ],
+      "trigger": "新方案或影响关键结论的方案修改",
+      "deliverable": "绑定输入版本的审查结论与精确修改项",
+      "acceptance": "审查执行者不同于作者；通过结论绑定可核验依据"
+    },
+    {
+      "id": "product_ux",
+      "name": "产品与体验",
+      "owner": "product_manager",
+      "specialists": [
+        "product_analyst",
+        "ui_designer"
+      ],
+      "trigger": "需求或用户界面/交互变化",
+      "deliverable": "精简需求、场景、组件及关键状态约束",
+      "acceptance": "用户结果可测试；无界面变更不启动设计工单"
+    },
+    {
+      "id": "visual_art",
+      "name": "视觉美术",
+      "owner": "art_director",
+      "specialists": [
+        "visual_researcher",
+        "visual_asset_artist"
+      ],
+      "trigger": "项目存在品牌、视觉资产或图像制作/修改需求；无相关工单不启动",
+      "deliverable": "带来源与权利说明的视觉研究、明确资产规格、可编辑源文件、导出文件和来源清单",
+      "acceptance": "品牌与用户设备适配、文字和二维码准确、文件可编辑可用；UI交互、前端功能及可访问性由独立岗位验收"
+    },
+    {
+      "id": "architecture",
+      "name": "架构设计",
+      "owner": "architecture_manager",
+      "specialists": [
+        "architecture_researcher"
+      ],
+      "trigger": "接口、数据约束或新依赖变化",
+      "deliverable": "短决策记录、接口契约与版本选型",
+      "acceptance": "契约一致且来源适用，现有架构可用时不重建"
+    },
+    {
+      "id": "frontend",
+      "name": "前端工程",
+      "owner": "engineering_manager",
+      "specialists": [
+        "frontend_engineer"
+      ],
+      "trigger": "已就绪的界面开发任务",
+      "deliverable": "完整前端改动与必要行为检查",
+      "acceptance": "构建与用户关键行为检查实际通过"
+    },
+    {
+      "id": "backend",
+      "name": "后端工程",
+      "owner": "engineering_manager",
+      "specialists": [
+        "backend_engineer"
+      ],
+      "trigger": "已就绪的服务与领域逻辑任务",
+      "deliverable": "业务接口、数据约束与必要迁移",
+      "acceptance": "业务验收、权限和失败路径按风险实际检查"
+    },
+    {
+      "id": "test",
+      "name": "测试与安全",
+      "owner": "qa_manager",
+      "specialists": [
+        "qa_reviewer",
+        "qa_verifier"
+      ],
+      "trigger": "候选变更、风险变化或发布前",
+      "deliverable": "绑定源码版本的审查和独立验收证据",
+      "acceptance": "实际命令和结果可复现，失败定向反馈责任工单"
+    },
+    {
+      "id": "operations",
+      "name": "发布运维",
+      "owner": "logistics_manager",
+      "specialists": [
+        "operations_engineer"
+      ],
+      "trigger": "验收后的发布、运行告警或恢复演练",
+      "deliverable": "部署回执、监测健康和备份/回退验证",
+      "acceptance": "目标环境、版本和实际健康状态明确，无权限不虚报部署"
+    },
+    {
+      "id": "logistics",
+      "name": "平台后勤",
+      "owner": "logistics_manager",
+      "specialists": [
+        "logistics_dependencies",
+        "logistics_browser",
+        "logistics_mail",
+        "logistics_profile",
+        "logistics_budget"
+      ],
+      "trigger": "工具、环境、账号能力、额度或费用出现实际缺口",
+      "deliverable": "可用依赖、授权服务映射、资源与成本台账",
+      "acceptance": "环境能力经验证，秘密不落日志，费用未知时明确标记"
+    }
+  ],
+  "handoff": {
+    "required_fields": [
+      "task_id",
+      "input_revision",
+      "facts",
+      "artifact_refs",
+      "write_scope",
+      "acceptance",
+      "next_action",
+      "unverified_claims"
+    ],
+    "context_scope": "task_scoped",
+    "share_raw_conversation": false,
+    "peer_claims": "untrusted_until_verified"
+  },
+  "independent_plan_review": {
+    "producer_role": "solution_planner",
+    "reviewer_role": "plan_reviewer",
+    "review_owner": "qa_manager",
+    "allow_self_approval": false,
+    "require_distinct_actor": true,
+    "approval_binds": "input_revision_and_artifact_refs"
+  }
+}

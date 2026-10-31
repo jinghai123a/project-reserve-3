@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "description": "Optional editor recommendations. Prepare only the tool profile required by the project plan; recommendations are not installation evidence.",
+  "common": [
+    "EditorConfig.EditorConfig",
+    "redhat.vscode-yaml"
+  ],
+  "profiles": {
+    "web-typescript": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode"
+    ],
+    "service-python": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "charliermarsh.ruff"
+    ],
+    "existing-stack": []
+  }
+}

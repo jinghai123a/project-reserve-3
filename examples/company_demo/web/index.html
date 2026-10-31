@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>工单交付台 · CloudKit</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="CloudKit 工单交付台首页"><span class="brand-mark" aria-hidden="true">C</span> CLOUDKIT <span class="brand-divider">/</span> 团队工作台</a>
+      <span class="workspace-badge"><span aria-hidden="true"></span> 项目协作</span>
+    </header>
+    <main>
+      <div class="page-heading">
+        <div><p class="eyebrow">DELIVERY WORKSPACE</p><h1>工单交付台</h1><p class="intro">从一个明确的任务开始，让每次交付都有迹可循。</p></div>
+        <button class="refresh-button" id="refresh-button" type="button">刷新工单</button>
+      </div>
+      <section class="metrics" aria-label="工单统计">
+        <div class="metric"><span>全部工单</span><strong id="total-count">—</strong><small>团队的交付清单</small></div>
+        <div class="metric"><span><i class="dot pending-dot" aria-hidden="true"></i>待完成</span><strong id="todo-count">—</strong><small>把注意力留给下一步</small></div>
+        <div class="metric"><span><i class="dot done-dot" aria-hidden="true"></i>已完成</span><strong id="done-count">—</strong><small>每个完成都值得记录</small></div>
+      </section>
+      <div class="workspace-grid">
+        <section class="panel create-panel" aria-labelledby="create-heading">
+          <div class="panel-heading"><span class="section-number">01</span><h2 id="create-heading">新增工单</h2></div>
+          <p class="section-note">写清楚一件需要完成的事。</p>
+          <form id="task-form">
+            <label for="task-title">任务标题</label>
+            <textarea id="task-title" name="title" rows="4" maxlength="120" required placeholder="例如：完成首页交互验收" aria-describedby="title-hint title-count"></textarea>
+            <div class="input-meta"><span id="title-hint">1–120 个字符</span><span id="title-count">0 / 120</span></div>
+            <button class="primary-button" id="create-button" type="submit">创建工单 <span aria-hidden="true">＋</span></button>
+          </form>
+          <div class="tip"><span class="tip-mark" aria-hidden="true">↗</span><p>把大目标拆成可执行的小任务，完成一项，再推进一项。</p></div>
+        </section>
+        <section class="panel tasks-panel" aria-labelledby="tasks-heading" aria-busy="true" id="tasks-panel">
+          <div class="list-heading"><div class="panel-heading"><span class="section-number">02</span><h2 id="tasks-heading">任务清单</h2></div><span class="list-caption">按创建顺序记录</span></div>
+          <p id="loading-state" class="state-message" role="status">正在读取工单…</p>
+          <div id="empty-state" class="empty-state" hidden><span class="empty-icon" aria-hidden="true">✓</span><h3>准备好开始下一次交付</h3><p>创建第一张工单，把想法变成行动。</p></div>
+          <ul id="task-list" class="task-list" aria-label="工单列表"></ul>
+        </section>
+      </div>
+      <p id="error-message" class="error-message" role="alert" hidden></p>
+      <p id="status-message" class="sr-only" role="status" aria-live="polite"></p>
+    </main>
+    <footer><span>CloudKit · 工单协作演示</span><span>清晰分工，逐项交付。</span></footer>
+  </div>
+</body>
+</html>

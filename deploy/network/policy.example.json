@@ -1,0 +1,12 @@
+{
+  "tagOwners": {
+    "tag:cloudkit-admin": ["autogroup:admin"]
+  },
+  "grants": [
+    {
+      "src": ["autogroup:admin"],
+      "dst": ["tag:cloudkit-admin"],
+      "ip": ["tcp:2222"]
+    }
+  ]
+}
