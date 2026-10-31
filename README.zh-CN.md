@@ -1,5 +1,9 @@
 # Cloud Company Kit
 
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](LICENSE)
+[![Core acceptance](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/ci.yml/badge.svg)](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/ci.yml)
+[![Cloud deployment](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/deploy-smoke.yml/badge.svg)](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/deploy-smoke.yml)
+
 **按方案调用 Agent，在云端持续执行，用真实证据完成交付。**
 
 一套可自行部署的 AI 软件交付工作台：一个负责人按方案分派任务，专业角色按需参与，Git 保存任务状态与检查点，独立验收确认结果。
@@ -22,6 +26,8 @@
 需要 Python 3.11+ 和 Git。以下演练无需云账号或模型额度：
 
 ```bash
+git clone https://github.com/jinghai123a/Cloud-Company-Kit.git
+cd Cloud-Company-Kit
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install .

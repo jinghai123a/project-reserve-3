@@ -4,7 +4,8 @@
 
 | 项目 | 配置位置 | 操作 |
 | --- | --- | --- |
-| 仓库名称 | GitHub → Settings → General → Repository name | 建议使用 `cloud-company-kit`；当前公开仓地址以所在仓库为准 |
+| 仓库名称 | [Cloud-Company-Kit](https://github.com/jinghai123a/Cloud-Company-Kit) | 已完成改名，无需重复操作 |
+| 开源许可证 | [LICENSE](../LICENSE) | Unlicense；GitHub 已识别，双语首页提供入口 |
 | About 描述 | 仓库首页 About | `Plan-driven multi-agent cloud execution with durable state, independent verification and recovery.` |
 | Topics | 仓库首页 About | `ai-agents`, `multi-agent`, `codex`, `workflow`, `docker`, `self-hosted`, `automation`, `developer-tools` |
 | Actions | Settings → Actions → General | 开启本仓库工作流；检查首次运行结果 |

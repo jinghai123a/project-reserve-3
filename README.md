@@ -1,5 +1,9 @@
 # Cloud Company Kit
 
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](LICENSE)
+[![Core acceptance](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/ci.yml/badge.svg)](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/ci.yml)
+[![Cloud deployment](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/deploy-smoke.yml/badge.svg)](https://github.com/jinghai123a/Cloud-Company-Kit/actions/workflows/deploy-smoke.yml)
+
 **Plan-driven AI agents. Recoverable cloud execution. Evidence-backed delivery.**
 
 A self-hosted cloud workspace for Codex and multi-agent software delivery: one accountable coordinator, specialist roles activated by the project plan, Git-backed task state, and independent acceptance checks.
@@ -38,6 +42,8 @@ The role catalog contains 28 optional roles across 14 responsibilities. It is a 
 Python 3.11+ and Git are enough for the core and deterministic demo.
 
 ```bash
+git clone https://github.com/jinghai123a/Cloud-Company-Kit.git
+cd Cloud-Company-Kit
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install .
